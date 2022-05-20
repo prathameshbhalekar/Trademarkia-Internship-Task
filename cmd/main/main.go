@@ -12,10 +12,13 @@ import (
 
 func main() {
 
-	err := godotenv.Load("./../../pkg/env/.env")
+	env := os.Getenv("APP_ENV")
+	if env != "production" {
+		err := godotenv.Load("./../../pkg/env/.env")
 
-	if err != nil {
-		log.Fatalf("Error loading .env file")
+		if err != nil {
+			log.Fatalf("Error loading .env file")
+		}
 	}
 
 	port := os.Getenv("PORT")
