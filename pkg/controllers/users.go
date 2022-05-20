@@ -2,6 +2,7 @@ package controllers
 
 import (
 	"errors"
+	"fmt"
 	"net/http"
 	"strconv"
 	"strings"
@@ -13,6 +14,7 @@ import (
 )
 
 func FindInRange(c *gin.Context) {
+	fmt.Print("func")
 	id_str := c.Query("id")
 	k_str := c.Query("k")
 	k, k_err := strconv.Atoi(k_str)
