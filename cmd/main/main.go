@@ -1,23 +1,34 @@
 package main
 
 import (
-	"fmt"
+	"log"
+	"os"
 
 	"github.com/gin-gonic/gin"
+	"github.com/joho/godotenv"
 	"github.com/prathameshbhalekar/trademarkia-task/pkg/db"
 	"github.com/prathameshbhalekar/trademarkia-task/pkg/routes"
 )
 
 func main() {
 
-	// port := os.Getenv("PORT")
-	// dbUrl := os.Getenv("DB_URL")
+	env := os.Getenv("APP_ENV")
+	if env != "production" {
+		err := godotenv.Load("./../../pkg/env/.env")
+
+		if err != nil {
+			log.Fatalf("Error loading .env file")
+		}
+	}
+
+	port := os.Getenv("PORT")
+	dbUrl := os.Getenv("DB_URL")
 
 	r := gin.Default()
-	db.ConnectDatabase("postgres://sdproibdhkcqbn:b97f7c1b216de296f76929bbd627c78505e0ce334306a51a84e71b2fcb58a35b@ec2-3-228-235-79.compute-1.amazonaws.com:5432/d5nhe9naad517d")
+	db.ConnectDatabase(dbUrl)
 
 	routes.RegisterUserRoutes(r)
 	routes.RegisterLikesRoutes(r)
-	fmt.Print("running")
-	r.Run()
+
+	r.Run(port)
 }
