@@ -10,7 +10,7 @@ import (
 
 func main() {
 
-	port := os.Getenv("PORT")
+	// port := os.Getenv("PORT")
 	dbUrl := os.Getenv("DB_URL")
 
 	r := gin.Default()
@@ -19,5 +19,5 @@ func main() {
 	routes.RegisterUserRoutes(r)
 	routes.RegisterLikesRoutes(r)
 
-	r.Run(port)
+	r.Run()
 }
