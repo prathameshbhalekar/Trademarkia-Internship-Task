@@ -1,4 +1,4 @@
-# Trademarkia-Task
+# Trademarkia-Internship-Task
 
 Endpoint: https://trademarkia-app.herokuapp.com
 
